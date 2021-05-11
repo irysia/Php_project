@@ -1,4 +1,15 @@
-<?php ?>
+<?php
+
+require "../vendor/autoload.php";
+include "../src/Entity/html.php";
+include "../src/fakeData.php";
+use Entity\Post;
+use Entity\PostType;
+use Entity\Topic;
+use Entity\User;
+
+use function Entity\checkUserContentAndFormatProper;
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -52,14 +63,20 @@
 
 <!-- CONTENT -->
 <ul class="list-group">
+<!-- topic1 -->
+<?php 
+foreach ($topics as $one_topic) {
+    # code...
+
+?>
   <li class="list-group-item border-0">
-     <!-- category/theme -->
+     <!-- topic details -->
      <div class="media">
         <img src="images/userProfile/resize/portrait1.jpg" class="align-self-start mr-3 rounded-circle" alt="portrait auteur du thème">
         <div class="media-body">
-            <span><small>04/05/2021</small></span>
-            <h5 class="mt-0">Enfer</h5>
-            <p>Il est juste que celui-là subisse un châtiment sans fin qui, par amour des choses qui n'ont point de durée, se dépouille éternellement de cet amour. La Divine Comédie, Le Paradis (1321), XV de Dante</p>
+            <span><small><?=$one_topic->created_at ?></small></span>
+            <h5 class="mt-0"><?=$one_topic->topic ?></h5>
+            <p><?= $one_topic->desc ?></p>
         </div>
     </div>
     <div class="row my-3">
@@ -71,7 +88,53 @@
     <!-- posts relatives grid -->
     <div class="row container ml-5 post">
         <div class="card-columns  data-masonry='{"percentPosition": true }' ">
-            <div class="card">
+
+        <?php 
+            foreach ($posts as $one_post) {
+                if ($one_topic->topic === $one_post->topic){
+
+                    ?>  
+<!-- $post14 = new Post();
+$post14->id=14;
+$post14->title ="";
+$post14->desc="Jérôme Touzalin / Le Pommier";
+$post14->content="La danse, c’est de l’architecture en mouvement.";
+$post14->created_at="02/04/2021";
+$post14->postType = $postTypeTxt->id;
+$post14->topic =$topic3;
+$post14->user=$user1;      -->
+
+
+        <!-- modèle card -->
+        <div class="card">
+            <!-- version youtube/vimeo/soundcloud -->
+            <div class="embed-responsive embed-responsive-21by9"><?=checkUserContentAndFormatProper($one_post->postType,$one_post->content)?></div>    
+            <div class="card-body">
+                <h5 class="card-title"><?=$one_post->title ?></h5>
+                <p class="card-text"><?=$one_post->desc ?></p>
+                <p class="card-text"><small class="text-muted"><?=$one_post->created_at ?></small></p>
+            </div>     
+        </div>
+
+        <!-- <div class="card bg-primary text-white text-center p-3">
+            <blockquote class="blockquote mb-0 card-body">
+                <p>Toutes les choses de la terre vont comme vous à la mort ; mais cela ne se voit pas en quelques-unes qui durent longtemps, parce que la vie de l'homme est courte.</p>
+                <footer class="blockquote-footer">
+                    <small class=" text-white"><cite title="Source Title">La Divine Comédie, Le Paradis (1321), XVI de Dante</cite></small>
+                </footer>
+            </blockquote>
+            </div> -->
+<?php
+
+    }
+}
+?>
+
+
+
+
+
+            <!-- <div class="card">
                 <div class="embed-responsive embed-responsive-21by9">
                     <iframe width="100%" height="auto" src="https://player.vimeo.com/video/95510211"  frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen scrolling="no" class="embed-responsive-item"></iframe>
                 </div>         
@@ -131,23 +194,23 @@
                     <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
                 </div>
             </div>
-        </div>
-    </div> 
-  </li>
+        </div> -->
+    <!-- </div> 
+  </li> -->
 
-
-  <li class="list-group-item border-0">
-    <!-- category/theme -->
-    <div class="media">
+<!-- topic2 -->
+  <!-- <li class="list-group-item border-0"> -->
+     <!-- topic details -->
+     <!-- <div class="media">
         <img src="images/userProfile/resize/portrait3.jpg" class="align-self-start mr-3 rounded-circle" alt="portrait auteur du thème">
         <div class="media-body">
             <span><small>26/04/2021</small></span>
             <h5 class="mt-0">La catastrophe</h5>
             <p>Parler de l'horrible, montrer l'horrible. Comment faut-il en parler? Peut-on en parler ? Peut-on le nommer ?</p>
         </div>
-    </div>
+    </div> -->
     <!-- posts relatives grid -->
-    <div class="row container ml-5 post">
+    <!-- <div class="row container ml-5 post">
         <div class="card-columns  data-masonry='{"percentPosition": true }' ">
             <div class="card">
                 <div class="embed-responsive embed-responsive-21by9">
@@ -175,22 +238,24 @@
                 </div>  
             </div>
         </div>
-    </div> 
+    </div>  -->
   
-  </li>
-  <li class="list-group-item border-0">
-    <!-- category/theme -->
-    <div class="media">
+  <!-- </li> -->
+
+<!-- topic3 -->
+  <!-- <li class="list-group-item border-0"> -->
+     <!-- topic details -->
+     <!-- <div class="media">
         <img src="images/userProfile/resize/portrait2.jpg" class="align-self-start mr-3 rounded-circle" alt="portrait auteur du thème">
         <div class="media-body">
             <span><small>10/04/2021</small></span>
             <h5 class="mt-0">Le mouvement, le voyage, le mirroir</h5>
             <p>La danse, le geste, se regarder, communiquer</p>
         </div>
-    </div>
+    </div> -->
     <!-- posts relatives grid -->
         <!-- posts relatives grid -->
-        <div class="row container ml-5 post">
+        <!-- <div class="row container ml-5 post">
         <div class="card-columns  data-masonry='{"percentPosition": true }' ">
             <div class="card">
                 <div class="embed-responsive embed-responsive-21by9">
@@ -208,7 +273,7 @@
                 </blockquote>
             </div>
             <div class="card p-3">
-                <div class="embed-responsive embed-responsive-21by9">
+                <div class="embed-responsive embed-responsive-21by9" style="width: 100%;">
                     <iframe width="560" height="315" src="https://www.youtube.com/embed/NbztFrI_zj4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </div>
             </div>
@@ -229,8 +294,10 @@
             </div>
         </div>
     </div> 
-  </li>
-
+  </li> -->
+<?php
+}
+?>
 </ul>
    
 
