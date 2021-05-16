@@ -1,0 +1,27 @@
+[
+    {
+        "id":1,
+        "postType" : "Texte",
+        "postTypeUrl" : " "
+    },
+    {
+        "id":2,
+        "postType" : "Image",
+        "postTypeUrl" : "image"
+    },
+    {
+        "id":3,
+        "postType" : "Youtube",
+        "postTypeUrl" : "https://www.youtube.com/embed/"
+    },
+    {
+        "id":4,
+        "postType" : "Soundcloud",
+        "postTypeUrl" : "https://w.soundcloud.com/player/"
+    },
+    {
+        "id":4,
+        "postType" : "Vimeo",
+        "postTypeUrl" : "https://player.vimeo.com/video/"
+    }
+]

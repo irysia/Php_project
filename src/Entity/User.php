@@ -2,6 +2,7 @@
 
 namespace Entity;
 
+use ludk\Utils\Serializer;
 
 class User{
 
@@ -9,9 +10,5 @@ class User{
     public string $nickname;
     public string $password;
     public $avatar;
-
-
-
-
-
+    use Serializer;
 }

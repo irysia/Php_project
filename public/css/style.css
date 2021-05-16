@@ -2,6 +2,14 @@ body, html {
     height:100%   
  }
 
+.intro{
+    height: 600px;
+    background-image: url('../images/header-smoke.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: #cccccc;
+}
 
 .post{
     height : 500px;
@@ -11,3 +19,4 @@ body, html {
 iframe{
     width: 100%;
 }
+

@@ -1,12 +1,17 @@
 <?php
+// use ludk\Persistence\ORM;
+// require __DIR__ . '/../vendor/autoload.php';
+// $orm = new ORM(__DIR__ . '/../Resources');
+// $codeRepo = $orm->getRepository(Code::class);
+// $items = $codeRepo->findAll();
 
 require "../vendor/autoload.php";
 include "../src/Entity/html.php";
 include "../src/fakeData.php";
-use Entity\Post;
-use Entity\PostType;
-use Entity\Topic;
-use Entity\User;
+// use Entity\Post;
+// use Entity\PostType;
+// use Entity\Topic;
+// use Entity\User;
 
 use function Entity\checkUserContentAndFormatProper;
 ?>
@@ -18,7 +23,7 @@ use function Entity\checkUserContentAndFormatProper;
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="./css/style.css">
     <title>Pensine</title>
 </head>
 <body>
@@ -40,6 +45,13 @@ use function Entity\checkUserContentAndFormatProper;
         </div>
     </div>
 </nav>
+<!-- header -->
+<header class="intro">    
+    <div class="container-fluid">
+        <h1>Pensine</h1>
+        <p>Partage d'idées et d'inspiration</p>
+    </div>
+</header>
 
 <!-- pensine -->
 <div class="container my-3">
@@ -91,8 +103,8 @@ foreach ($topics as $one_topic) {
 
         <?php 
             foreach ($posts as $one_post) {
-                if ($one_topic->topic === $one_post->topic){
-
+              
+                if ($one_topic->topic === $one_post->topic->topic){
                     ?>  
 <!-- $post14 = new Post();
 $post14->id=14;
@@ -108,7 +120,7 @@ $post14->user=$user1;      -->
         <!-- modèle card -->
         <div class="card">
             <!-- version youtube/vimeo/soundcloud -->
-            <div class="embed-responsive embed-responsive-21by9"><?=checkUserContentAndFormatProper($one_post->postType,$one_post->content)?></div>    
+            <div class="embed-responsive embed-responsive-21by9"><?=checkUserContentAndFormatProper($one_post->postType->id,$one_post->content)?></div>    
             <div class="card-body">
                 <h5 class="card-title"><?=$one_post->title ?></h5>
                 <p class="card-text"><?=$one_post->desc ?></p>
