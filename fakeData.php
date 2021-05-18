@@ -1,28 +1,4 @@
 <?php
-require"../vendor/autoload.php";
-use Entity\Post;
-use Entity\PostType;
-use Entity\Topic;
-use Entity\User;
-
-use ludk\Persistence\ORM;
-require __DIR__ . '/../vendor/autoload.php';
-
-$orm = new ORM(__DIR__ . '/../Resources');
-
-$postRepo = $orm->getRepository(Post::class);
-$posts = $postRepo->findAll();
-// var_dump($posts);
-// die();
-$postTypeRepo = $orm->getRepository(PostType::class);
-$postTypes = $postTypeRepo->findAll();
-
-$topicsRepo = $orm->getRepository(Topic::class);
-$topics = $topicsRepo->findAll();
-
-$usersRepo = $orm->getRepository(User::class);
-$users = $usersRepo->findAll();
-
 // //USERS
 // $user1 = new User();
 // $user1->id=1;

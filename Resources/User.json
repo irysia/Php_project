@@ -2,11 +2,13 @@
     {
         "id":1,
         "nickname":"IRYSIA",
-        "password":"pwd1"
+        "password":"pwd1",
+        "avatarUrl":""
     },
     {
         "id":2,
         "nickname":"PEAH",
-        "password":"pwd2"
+        "password":"pwd2",
+        "avatarUrl":""
     }
 ]

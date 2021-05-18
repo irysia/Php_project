@@ -9,6 +9,6 @@ class User{
     public int $id ;
     public string $nickname;
     public string $password;
-    public $avatar;
+    public string $avatarUrl;
     use Serializer;
 }

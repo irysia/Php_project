@@ -3,12 +3,21 @@ body, html {
  }
 
 .intro{
-    height: 600px;
-    background-image: url('../images/header-smoke.jpg');
+    height: 350px;
+    background-image: url("https://www.hp-lexicon.org/wp-content/uploads/2017/02/smoke_stock_iii_by_melyssah6_stock-d46fz57.jpg");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
     background-color: #cccccc;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+}
+.title{
+    color: white;
+    text-align: right;
+    margin-bottom: 20px;
 }
 
 .post{
