@@ -1,30 +1,12 @@
 <?php 
 namespace templates;
+include __DIR__ . "/include/header.php";
+
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-    <title>Pensine</title>
-    <link rel="stylesheet" href="css/style.css">
-</head>
-<body>
-<!-- nav -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container">
-        <a class="navbar-brand" href="/">Pensine</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-    </div> 
-</nav>
+
 <div class="container">
     <div class="row">
       <div class="col my-5">
-        <h1 class="display-4">Partage d'idées et d'inspirations</h1>
         <blockquote class="blockquote text-center">
           <p class="mb-0">Rejoignez la communauté! Partagez vos idées et laissez les autres les nourrir.<br> Regroupez vos pensées, inspirez vous et inspirez les autres !</p>
         </blockquote>

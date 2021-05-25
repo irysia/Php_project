@@ -4,6 +4,9 @@ namespace templates;
 include "../src/checkFormatHtml.php";
 use function Entity\checkUserContentAndFormatProper;
 include __DIR__ . "/include/header.php";
+date_default_timezone_set('UTC');
+$today = date("d.m.y - g:i a"); 
+
 ?>
 
 <!-- modale ajout thème -->
@@ -11,12 +14,33 @@ include __DIR__ . "/include/header.php";
 <!-- Vertically centered scrollable modal -->
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" >
         <div class="modal-content">
-            <div class="modal-header">
+            <div class="modal-header">           
+                <h3><i class="fas fa-comment-dots"></i> Création nouveau thème</h3>
             </div>
             <div class="modal-body">
-            <p>Test modale new Topic</p>
+                <form action="?action=newTopic" method="POST">
+                    <div class="form-row align-items-center">
+                        <div class="col d-flex justify-content-between align-items-center my-1">
+                            <label class="sr-only" for="topicTitle">Titre du thème</label>
+                            <span><i class="fas fa-heading mr-3 pb-2"></i></span>
+                            <input type="text" class="form-control mb-2" id="topicTitle" placeholder="Titre du thème" required>
+                        </div>
+                    </div>
+                    <div class="form-row align-items-center">
+                        <div class="col d-flex justify-content-between align-items-center my-1">
+                            <label class="sr-only" for="topicDesc">Description</label>
+                            <span><i class="fas fa-align-justify mr-3 pb-2"></i></span>
+                            <textarea type="text" class="form-control mb-2" id="topicDesc" placeholder="Description"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-row align-items-center">
+                        <label for="creationDate" class="sr-only"><?= $today ?></label>
+                        <input  id="creationDate" class="sr-only" type="text" placeholder="<?= $today ?>">
+                    </div>
+                </form>
             </div>
             <div class="modal-footer">
+                <button class="btn btn-outline-info my-2 my-sm-0 " type="submit" data-dismiss="modal">Créer Thème</button>
             </div>
             </div>
         </div>
@@ -24,15 +48,58 @@ include __DIR__ . "/include/header.php";
 </div>    
 <!-- modale ajout Post -->
 <div class="modal fade" id="newPost" tabindex="-1" aria-labelledby="newPost" aria-hidden="true">
+<!-- trouver comment passer les infos du topic sur lequel on veut ajouter le post -->
 <!-- Vertically centered scrollable modal -->
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" >
         <div class="modal-content">
             <div class="modal-header">
+            <h3><i class="fas fa-comments"></i> Création nouveau post</h3>
+            <p id="topicSelected"></p>
             </div>
             <div class="modal-body">
-            <p>Test modale new Post</p>
+            <form action="?action=newPost" method="POST">
+            <div class="form-row align-items-center">
+                <div class="col d-flex justify-content-between align-items-center my-1">
+                    <label class="mr-sm-2" for="postType">Type de post</label>
+                    <select class="custom-select mr-sm-2" id="postType" style="width: 70%;">
+                    <?php foreach ($postTypes as $one_PostType) {
+                    ?>
+                        <option value="<?=$one_PostType->id?>"><?= $one_PostType->postType ?></option>
+                    <?php 
+                    }
+                    ?>
+                    </select>
+                </div>
+            </div>
+            <div class="form-row align-items-center">
+                <div class="col d-flex justify-content-between align-items-center my-1">
+                    <label class="sr-only" for="postTitle">Title</label>
+                    <span><i class="fas fa-heading mr-3 pb-2"></i></span>
+                    <input type="text" class="form-control mb-2" id="postTitle" placeholder="Titre du post" required>
+                </div>
+            </div>
+            <div class="form-row align-items-center">
+                <div class="col d-flex justify-content-between align-items-center my-1">
+                    <label class="sr-only" for="postDesc">Description</label>
+                    <span><i class="fas fa-align-justify mr-3 pb-2"></i></span>
+                    <textarea type="text" class="form-control mb-2" id="postDesc" placeholder="Description"></textarea>
+                </div>
+            </div>
+            <div class="form-row align-items-center">
+                <div class="col d-flex justify-content-between align-items-center my-1">
+                    <label class="sr-only" for="postContent">URL contenu</label>
+                    <span><i class="fas fa-photo-video mr-3 pb-2"></i></span>
+                    <input type="text" class="form-control mb-2" id="postContent" placeholder="URL contenu" >
+                </div>
+            </div>
+            <div class="form-row align-items-center">
+                <label for="postCreationDate" class="sr-only"><?= $today ?></label>
+                <input  id="postCreationDate" class="sr-only" type="text" placeholder="<?= $today ?>">
+            </div>
+            </form>
             </div>
             <div class="modal-footer">
+                <button class="btn btn-outline-info my-2 my-sm-0 " type="submit" data-dismiss="modal" >Créer Post</button>
             </div>
             </div>
         </div>
@@ -128,6 +195,8 @@ if(isset($_SESSION['user'])){
 </div>
 <?php 
 }
+
+include __DIR__ .'/include/footer.php';
 ?>
 
 
@@ -140,10 +209,3 @@ if(isset($_SESSION['user'])){
 
 
 
-
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha384-GNFwBvfVxBkLMJpYMOABq3c+d3KnQxudP/mGPkzpZSTYykLBNsZEnG2D9G/X/+7D" crossorigin="anonymous" async></script>
-    <script src="js/script.js"></script>
-</body>
-</html>

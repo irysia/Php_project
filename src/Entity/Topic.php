@@ -11,4 +11,5 @@ class Topic{
     public string $created_at;
     public User $user;
     use Serializer;
+    
 }

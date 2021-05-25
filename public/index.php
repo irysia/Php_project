@@ -96,7 +96,10 @@ case 'login':
     }
 break;
 
-case 'new':
+case 'newTopic':
+break;
+
+case 'newPost':
 break;
 
 case 'display':

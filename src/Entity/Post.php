@@ -17,3 +17,4 @@ class Post{
     use Serializer;
 
 }
+
