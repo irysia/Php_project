@@ -2,6 +2,7 @@
 require "../vendor/autoload.php";
 session_start();
 
+use Controller\HomeController;
 use Entity\Post;
 use Entity\PostType;
 use Entity\Topic;
@@ -104,14 +105,8 @@ break;
 
 case 'display':
 default:
-  // search
-  if (isset($_GET['search'])) {
-    $topics = $topicsRepo->findBy(array("content" => '%' . $_GET['search'] . '%'));
-  } else {
-    $topics = $topicsRepo->findAll();
-  }
-
-  include "../templates/display.php";
+  $controller = new HomeController();
+  $controller->display();
 break;
 }
 

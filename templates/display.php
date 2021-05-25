@@ -61,10 +61,10 @@ $today = date("d.m.y - g:i a");
             <div class="form-row align-items-center">
                 <div class="col d-flex justify-content-between align-items-center my-1">
                     <label class="mr-sm-2" for="postType">Type de post</label>
-                    <select class="custom-select mr-sm-2" id="postType" style="width: 70%;">
-                    <?php foreach ($postTypes as $one_PostType) {
+                    <select class="custom-select mr-sm-2" id="postType" style="width: 70%; margin-right:0px!important; margin-bottom: .5rem!important">
+                    <?php foreach ($postTypes as $one_postType) {
                     ?>
-                        <option value="<?=$one_PostType->id?>"><?= $one_PostType->postType ?></option>
+                        <option value="<?=$one_postType->id?>"><?= $one_postType->postType ?></option>
                     <?php 
                     }
                     ?>
