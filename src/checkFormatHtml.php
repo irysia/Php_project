@@ -54,7 +54,7 @@ function checkUserContentAndFormatProper(int $userFormat, string $userContent){
             $markerEndUrl='';
             //le format est une image
             if (str_contains($userContent,$FormatToCompareWith)) {
-                $htmlToReturn = '<img src="'.$userContent.'">'; 
+                $htmlToReturn = $userContent; 
                 return $htmlToReturn;
             }
             $htmlToReturn = '<img src="'.$userContent.'">'; 

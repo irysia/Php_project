@@ -14,35 +14,39 @@ $today = date("d.m.y - g:i a");
 <!-- Vertically centered scrollable modal -->
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" >
         <div class="modal-content">
-            <div class="modal-header">           
-                <h3><i class="fas fa-comment-dots"></i> Création nouveau thème</h3>
-            </div>
-            <div class="modal-body">
-                <form action="?action=newTopic" method="POST">
-                    <div class="form-row align-items-center">
-                        <div class="col d-flex justify-content-between align-items-center my-1">
-                            <label class="sr-only" for="topicTitle">Titre du thème</label>
-                            <span><i class="fas fa-heading mr-3 pb-2"></i></span>
-                            <input type="text" class="form-control mb-2" id="topicTitle" placeholder="Titre du thème" required>
+            <form action="/newTopic" id="newTopicForm" method="POST">
+                <div class="modal-header">           
+                    <h3><i class="fas fa-comment-dots"></i> Création nouveau thème</h3>
+                </div>
+                <div class="modal-body">
+                        <?php
+                        if (isset($errorMsg)) {
+                            echo "<div class='alert alert-warning' role='alert'>$errorMsg</div>";
+                        }
+                        ?>
+                        <div class="form-row align-items-center">
+                            <div class="col d-flex justify-content-between align-items-center my-1">
+                                <label class="sr-only" for="topicTitle">Titre du thème</label>
+                                <span><i class="fas fa-heading mr-3 pb-2"></i></span>
+                                <input type="text" class="form-control mb-2" name="topicTitle" placeholder="Titre du thème" required>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-row align-items-center">
-                        <div class="col d-flex justify-content-between align-items-center my-1">
-                            <label class="sr-only" for="topicDesc">Description</label>
-                            <span><i class="fas fa-align-justify mr-3 pb-2"></i></span>
-                            <textarea type="text" class="form-control mb-2" id="topicDesc" placeholder="Description"></textarea>
+                        <div class="form-row align-items-center">
+                            <div class="col d-flex justify-content-between align-items-center my-1">
+                                <label class="sr-only" for="topicDesc">Description</label>
+                                <span><i class="fas fa-align-justify mr-3 pb-2"></i></span>
+                                <textarea type="text" class="form-control mb-2" name="topicDesc" placeholder="Description"></textarea>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-row align-items-center">
-                        <label for="creationDate" class="sr-only"><?= $today ?></label>
-                        <input  id="creationDate" class="sr-only" type="text" placeholder="<?= $today ?>">
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-outline-info my-2 my-sm-0 " type="submit" data-dismiss="modal">Créer Thème</button>
-            </div>
-            </div>
+                        <div class="form-row align-items-center">
+                            <label for="creationDate" class="sr-only"><?= $today ?></label>
+                            <input  name="creationDate" class="sr-only" type="text" value="<?= $today ?>">
+                        </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-outline-info my-2 my-sm-0 " type="submit" data-dismiss="modal" >Créer Thème</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>    
@@ -52,56 +56,55 @@ $today = date("d.m.y - g:i a");
 <!-- Vertically centered scrollable modal -->
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" >
         <div class="modal-content">
-            <div class="modal-header">
-            <h3><i class="fas fa-comments"></i> Création nouveau post</h3>
-            <p id="topicSelected"></p>
-            </div>
-            <div class="modal-body">
-            <form action="?action=newPost" method="POST">
-            <div class="form-row align-items-center">
-                <div class="col d-flex justify-content-between align-items-center my-1">
-                    <label class="mr-sm-2" for="postType">Type de post</label>
-                    <select class="custom-select mr-sm-2" id="postType" style="width: 70%; margin-right:0px!important; margin-bottom: .5rem!important">
-                    <?php foreach ($postTypes as $one_postType) {
-                    ?>
-                        <option value="<?=$one_postType->id?>"><?= $one_postType->postType ?></option>
-                    <?php 
-                    }
-                    ?>
-                    </select>
+            <form action="/newPost" method="POST">
+                <div class="modal-header">
+                    <h3><i class="fas fa-comments"></i> Création nouveau post</h3>
+                    <p id="topicSelected"><?=$this->topic->id ?></p>
                 </div>
-            </div>
-            <div class="form-row align-items-center">
-                <div class="col d-flex justify-content-between align-items-center my-1">
-                    <label class="sr-only" for="postTitle">Title</label>
-                    <span><i class="fas fa-heading mr-3 pb-2"></i></span>
-                    <input type="text" class="form-control mb-2" id="postTitle" placeholder="Titre du post" required>
+                <div class="modal-body">
+                    <div class="form-row align-items-center">
+                        <div class="col d-flex justify-content-between align-items-center my-1">
+                            <label class="mr-sm-2" for="postType">Type de post</label>
+                            <select class="custom-select mr-sm-2" name="postType" style="width: 70%; margin-right:0px!important; margin-bottom: .5rem!important">
+                            <?php foreach ($postTypes as $one_postType) {
+                            ?>
+                                <option value="<?=$one_postType->id?>"><?= $one_postType->postType ?></option>
+                            <?php 
+                            }
+                            ?>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row align-items-center">
+                        <div class="col d-flex justify-content-between align-items-center my-1">
+                            <label class="sr-only" for="postTitle">Title</label>
+                            <span><i class="fas fa-heading mr-3 pb-2"></i></span>
+                            <input type="text" class="form-control mb-2" name="postTitle" placeholder="Titre du post" required>
+                        </div>
+                    </div>
+                    <div class="form-row align-items-center">
+                        <div class="col d-flex justify-content-between align-items-center my-1">
+                            <label class="sr-only" for="postDesc">Description</label>
+                            <span><i class="fas fa-align-justify mr-3 pb-2"></i></span>
+                            <textarea type="text" class="form-control mb-2" name="postDesc" placeholder="Description"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-row align-items-center">
+                        <div class="col d-flex justify-content-between align-items-center my-1">
+                            <label class="sr-only" for="postContent">URL contenu</label>
+                            <span><i class="fas fa-photo-video mr-3 pb-2"></i></span>
+                            <input type="text" class="form-control mb-2" name="postContent" placeholder="URL contenu" >
+                        </div>
+                    </div>
+                    <div class="form-row align-items-center">
+                        <label for="postCreationDate" class="sr-only"><?= $today ?></label>
+                        <input  name="postCreationDate" class="sr-only" type="text" placeholder="<?= $today ?>">
+                    </div>
                 </div>
-            </div>
-            <div class="form-row align-items-center">
-                <div class="col d-flex justify-content-between align-items-center my-1">
-                    <label class="sr-only" for="postDesc">Description</label>
-                    <span><i class="fas fa-align-justify mr-3 pb-2"></i></span>
-                    <textarea type="text" class="form-control mb-2" id="postDesc" placeholder="Description"></textarea>
+                <div class="modal-footer">
+                    <button class="btn btn-outline-info my-2 my-sm-0 " type="submit" data-dismiss="modal" >Créer Post</button>
                 </div>
-            </div>
-            <div class="form-row align-items-center">
-                <div class="col d-flex justify-content-between align-items-center my-1">
-                    <label class="sr-only" for="postContent">URL contenu</label>
-                    <span><i class="fas fa-photo-video mr-3 pb-2"></i></span>
-                    <input type="text" class="form-control mb-2" id="postContent" placeholder="URL contenu" >
-                </div>
-            </div>
-            <div class="form-row align-items-center">
-                <label for="postCreationDate" class="sr-only"><?= $today ?></label>
-                <input  id="postCreationDate" class="sr-only" type="text" placeholder="<?= $today ?>">
-            </div>
             </form>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-outline-info my-2 my-sm-0 " type="submit" data-dismiss="modal" >Créer Post</button>
-            </div>
-            </div>
         </div>
     </div>
 </div>  
@@ -124,7 +127,7 @@ if(isset($_SESSION['user'])){
     <div class="row my-3">
         <div class="col-12 d-flex justify-content-end">
             <!-- add theme -->
-            <button class="btn btn-info my-2 my-sm-0 " data-toggle="modal" data-target="#newTopic">Ajouter un thème</button>
+            <button class="btn btn-info my-2 my-sm-0 " data-toggle="modal" data-target="#newTopic" >Ajouter un thème</button>
         </div>
     </div>
 
@@ -148,7 +151,7 @@ if(isset($_SESSION['user'])){
         <div class="row my-3">
             <div class="col-12 d-flex justify-content-start ml-5">
                 <!-- add post on grid -->
-                <button class="btn btn-info my-2 my-sm-0  ml-3" data-toggle="modal" data-target="#newPost">Ajouter un post</button>
+                <button class="btn btn-info my-2 my-sm-0  ml-3" data-toggle="modal" data-target="#newPost" >Ajouter un post</button>
             </div>
         </div>
         <!-- posts relatives grid -->
@@ -158,27 +161,61 @@ if(isset($_SESSION['user'])){
         foreach ($posts as $one_post) {
             
             if ($one_topic->topic === $one_post->topic->topic){
+                
+                if($one_post->postType->id!==1){
                 ?>  
                 <!-- modèle card -->
                 <div class="card">
                     <!-- version youtube/vimeo/soundcloud -->
+                    <?php 
+                    if(!empty($one_post->content) && $one_post->postType->id!==2){
+                    ?>
                     <div class="embed-responsive embed-responsive-21by9"><?=checkUserContentAndFormatProper($one_post->postType->id,$one_post->content)?></div>    
+                    <?php 
+                    }
+                    if(!empty($one_post->content) && $one_post->postType->id===2){          
+                    ?>
+                    <img src="<?= checkUserContentAndFormatProper($one_post->postType->id,$one_post->content)?>" alt="" style="width:100%;">
+                    <?php 
+                    }
+                    ?>
                     <div class="card-body">
+                    <?php 
+                    if(!empty($one_post->title)){                    
+                    ?>
                         <h5 class="card-title"><?=$one_post->title ?></h5>
+                    <?php 
+                    }
+                    if(!empty($one_post->desc)){
+                    ?>                   
                         <p class="card-text"><?=$one_post->desc ?></p>
+                    <?php 
+                    }
+                    if(!empty($one_post->created_at)){
+                    ?>
                         <p class="card-text"><small class="text-muted"><?=$one_post->created_at ?></small></p>
+                    <?php 
+                    }
+                    ?>
                     </div>     
                 </div>
 
-                <!-- <div class="card bg-primary text-white text-center p-3">
-                    <blockquote class="blockquote mb-0 card-body">
-                        <p>Toutes les choses de la terre vont comme vous à la mort ; mais cela ne se voit pas en quelques-unes qui durent longtemps, parce que la vie de l'homme est courte.</p>
-                        <footer class="blockquote-footer">
-                            <small class=" text-white"><cite title="Source Title">La Divine Comédie, Le Paradis (1321), XVI de Dante</cite></small>
-                        </footer>
-                    </blockquote>
-                </div> -->
+                    <?php 
+                }   
+                    if($one_post->postType->id===1){
+
+                    
+                    ?>
+                    <div class="card bg-primary text-white text-center p-3">
+                        <blockquote class="blockquote mb-0 card-body">
+                            <p><?=$one_post->content ?></p>
+                            <footer class="blockquote-footer text-white">
+                                <small class="text-white"><cite title="Source Title"><?=$one_post->desc ?></cite></small>
+                            </footer>
+                        </blockquote>
+                    </div>
     <?php
+                    }
             }
         }
     }
@@ -191,7 +228,7 @@ if(isset($_SESSION['user'])){
 }else{
 ?>
 <div class="container my-5">
-<h2 class="display-5 text-center">Rejoignez la communauté et accédez aux différents sujets</h2>
+    <h2 class="display-5 text-center">Rejoignez la communauté et accédez aux différents sujets</h2>
 </div>
 <?php 
 }

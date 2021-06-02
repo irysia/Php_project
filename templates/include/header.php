@@ -25,12 +25,12 @@
             if (isset($_SESSION['user'])) {
             ?>  
                 <p class="mr-2 text-light my-2 my-sm-0 mr-2">Bienvenu(e) <?=$_SESSION['user']->nickname ? $_SESSION['user']->nickname : null ?> !</p>
-                <a class="nav-link btn btn-outline-info text-info my-2 my-sm-0 mr-2" href="?action=logout" role="button">Logout</a>
+                <a class="nav-link btn btn-outline-info text-info my-2 my-sm-0 mr-2" href="/logout" role="button">Logout</a>
             <?php 
             }else{
             ?>
-                <a class="nav-link btn btn-outline-info text-info my-2 my-sm-0 mr-2" href="?action=login" role="button">Login</a>
-                <a class="nav-link btn btn-info text-light my-2 my-sm-0 mr-2" href="?action=register" role="button">Sign In</a>
+                <a class="nav-link btn btn-outline-info text-info my-2 my-sm-0 mr-2" href="/login" role="button">Login</a>
+                <a class="nav-link btn btn-info text-light my-2 my-sm-0 mr-2" href="/register" role="button">Sign In</a>
             <?php 
             }
             ?>
