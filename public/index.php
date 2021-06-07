@@ -1,4 +1,4 @@
-<?php 
+<?php
 require "../vendor/autoload.php";
 session_start();
 
@@ -28,38 +28,34 @@ $action = substr(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), 1);
 
 switch ($action) {
 
-case 'register':
-  $controller = new AuthController();
-  $controller->register();
-break;
+  case 'register':
+    $controller = new AuthController();
+    $controller->register();
+    break;
 
-case 'logout':
-  $controller = new AuthController();
-  $controller->logout();
-break;
+  case 'logout':
+    $controller = new AuthController();
+    $controller->logout();
+    break;
 
-case 'login':
+  case 'login':
     $controller = new AuthController();
     $controller->login();
-break;
+    break;
 
-case 'newTopic':
-  $controller = new ContentController();
-  $controller->createTopic();
-break;
+  case 'newTopic':
+    $controller = new ContentController();
+    $controller->createTopic();
+    break;
 
-case 'newPost':
-  $controller = new ContentController();
-  $controller->createPost();
-break;
+  case 'newPost':
+    $controller = new ContentController();
+    $controller->createPost();
+    break;
 
-case 'display':
-default:
-  $controller = new HomeController();
-  $controller->display();
-break;
+  case 'display':
+  default:
+    $controller = new HomeController();
+    $controller->display();
+    break;
 }
-
-
-
-?>
