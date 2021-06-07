@@ -33,12 +33,17 @@ Class ContentController{
         //code creation post
         global $postRepo;
         global $manager;
+        global $postTypeRepo;
         $postRepo->findAll();
         
         if(isset($_SESSION['user'])){
+
+            
+            $postType = $postTypeRepo->find($_POST['postType']);
+
             $newPost = new Post(); 
             $newPost->title = $_POST['postTitle'];
-            $newPost->postType = $_POST['postType'];
+            $newPost->postType = $postType;
             $newPost->created_at = $_POST['postCreationDate'];
             $newPost->content = $_POST['postContent'];
             $newPost->desc = $_POST['postDesc'];

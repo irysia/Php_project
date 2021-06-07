@@ -101,10 +101,10 @@ $today = date("d/m/y - H:i ");
                         <label for="postCreationDate" class="sr-only"><?= $today ?></label>
                         <input  name="postCreationDate" class="sr-only" type="text" placeholder="<?= $today ?>">
                     </div>     
-                    <!-- <div class="form-row align-items-center">
+                    <div class="form-row align-items-center">
                         <label for="topicId" class="sr-only">Topic Id</label>
                         <input  name="topicId" class="sr-only" type="text" id="topicId" value="<?= $one_topic->id?>">
-                    </div>                -->
+                    </div>            
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-outline-info my-2 my-sm-0 " type="button" data-dismiss="modal">close</button>
@@ -160,7 +160,7 @@ if(isset($_SESSION['user'])){
                     
 
                     <!-- add post on grid -->
-                    <button class="btn btn-info my-2 my-sm-0  ml-3" data-id="<?= $one_topic->id ?>" onclick="  console.log(<?=$one_topic->id ?>)" data-toggle="modal" data-target="#newPost"  >Ajouter un post</button>
+                    <button class="btn btn-info my-2 my-sm-0  ml-3" data-id="<?= $one_topic->id ?>" onclick=" console.log(<?=$one_topic->id ?>)" data-toggle="modal" data-target="#newPost"  >Ajouter un post</button>
             </div>
         </div>
         <!-- posts relatives grid -->
