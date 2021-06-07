@@ -3,9 +3,10 @@ namespace templates;
 
 include "../src/checkFormatHtml.php";
 use function Entity\checkUserContentAndFormatProper;
+use function Controller\ContentController\getTopicId;
 include __DIR__ . "/include/header.php";
-date_default_timezone_set('UTC');
-$today = date("d.m.y - g:i a"); 
+date_default_timezone_set('Europe/Paris');
+$today = date("d/m/y - H:i "); 
 
 ?>
 
@@ -44,14 +45,15 @@ $today = date("d.m.y - g:i a");
                         </div>
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-outline-info my-2 my-sm-0 " type="submit" data-dismiss="modal" >Créer Thème</button>
+                    <button class="btn btn-outline-info my-2 my-sm-0 " type="button" data-dismiss="modal">close</button>
+                    <button class="btn btn-info my-2 my-sm-0 " type="submit" >Créer Thème</button>
                 </div>
             </form>
         </div>
     </div>
 </div>    
 <!-- modale ajout Post -->
-<div class="modal fade" id="newPost" tabindex="-1" aria-labelledby="newPost" aria-hidden="true">
+<div class="modal fade newPost" id="newPost" tabindex="-1" aria-labelledby="newPost" aria-hidden="true">
 <!-- trouver comment passer les infos du topic sur lequel on veut ajouter le post -->
 <!-- Vertically centered scrollable modal -->
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" >
@@ -59,7 +61,6 @@ $today = date("d.m.y - g:i a");
             <form action="/newPost" method="POST">
                 <div class="modal-header">
                     <h3><i class="fas fa-comments"></i> Création nouveau post</h3>
-                    <p id="topicSelected"><?=$this->topic->id ?></p>
                 </div>
                 <div class="modal-body">
                     <div class="form-row align-items-center">
@@ -79,14 +80,14 @@ $today = date("d.m.y - g:i a");
                         <div class="col d-flex justify-content-between align-items-center my-1">
                             <label class="sr-only" for="postTitle">Title</label>
                             <span><i class="fas fa-heading mr-3 pb-2"></i></span>
-                            <input type="text" class="form-control mb-2" name="postTitle" placeholder="Titre du post" required>
+                            <input type="text" class="form-control mb-2" name="postTitle" placeholder="Titre du post / Auteurs" required>
                         </div>
                     </div>
                     <div class="form-row align-items-center">
                         <div class="col d-flex justify-content-between align-items-center my-1">
                             <label class="sr-only" for="postDesc">Description</label>
                             <span><i class="fas fa-align-justify mr-3 pb-2"></i></span>
-                            <textarea type="text" class="form-control mb-2" name="postDesc" placeholder="Description"></textarea>
+                            <textarea type="text" class="form-control mb-2" name="postDesc" placeholder="Description / Citation"></textarea>
                         </div>
                     </div>
                     <div class="form-row align-items-center">
@@ -99,10 +100,15 @@ $today = date("d.m.y - g:i a");
                     <div class="form-row align-items-center">
                         <label for="postCreationDate" class="sr-only"><?= $today ?></label>
                         <input  name="postCreationDate" class="sr-only" type="text" placeholder="<?= $today ?>">
-                    </div>
+                    </div>     
+                    <!-- <div class="form-row align-items-center">
+                        <label for="topicId" class="sr-only">Topic Id</label>
+                        <input  name="topicId" class="sr-only" type="text" id="topicId" value="<?= $one_topic->id?>">
+                    </div>                -->
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-outline-info my-2 my-sm-0 " type="submit" data-dismiss="modal" >Créer Post</button>
+                    <button class="btn btn-outline-info my-2 my-sm-0 " type="button" data-dismiss="modal">close</button>
+                    <button class="btn btn-info my-2 my-sm-0 " type="submit" >Créer Post</button>
                 </div>
             </form>
         </div>
@@ -127,7 +133,7 @@ if(isset($_SESSION['user'])){
     <div class="row my-3">
         <div class="col-12 d-flex justify-content-end">
             <!-- add theme -->
-            <button class="btn btn-info my-2 my-sm-0 " data-toggle="modal" data-target="#newTopic" >Ajouter un thème</button>
+            <button class="btn btn-info my-2 my-sm-0 "  data-toggle="modal" data-target="#newTopic" >Ajouter un thème</button>
         </div>
     </div>
 
@@ -143,6 +149,7 @@ if(isset($_SESSION['user'])){
         <div class="media">
             <img src="images/userProfile/resize/portrait1.jpg" class="align-self-start mr-3 rounded-circle" alt="portrait auteur du thème">
             <div class="media-body">
+                <p><?= $one_topic->id ?></p>
                 <span><small><?=$one_topic->created_at ?></small></span>
                 <h5 class="mt-0"><?=$one_topic->topic ?></h5>
                 <p><?= $one_topic->desc ?></p>
@@ -150,8 +157,10 @@ if(isset($_SESSION['user'])){
         </div>
         <div class="row my-3">
             <div class="col-12 d-flex justify-content-start ml-5">
-                <!-- add post on grid -->
-                <button class="btn btn-info my-2 my-sm-0  ml-3" data-toggle="modal" data-target="#newPost" >Ajouter un post</button>
+                    
+
+                    <!-- add post on grid -->
+                    <button class="btn btn-info my-2 my-sm-0  ml-3" data-id="<?= $one_topic->id ?>" onclick="  console.log(<?=$one_topic->id ?>)" data-toggle="modal" data-target="#newPost"  >Ajouter un post</button>
             </div>
         </div>
         <!-- posts relatives grid -->
@@ -211,14 +220,15 @@ if(isset($_SESSION['user'])){
                             <p><?=$one_post->content ?></p>
                             <footer class="blockquote-footer text-white">
                                 <small class="text-white"><cite title="Source Title"><?=$one_post->desc ?></cite></small>
+                                <p><small class="text-white"><?=$one_post->created_at ?></small></p>
                             </footer>
                         </blockquote>
                     </div>
-    <?php
+                    <?php
                     }
+                }
             }
         }
-    }
     ?>
             </div>
         </li>

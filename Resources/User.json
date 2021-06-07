@@ -3,12 +3,12 @@
         "id":1,
         "nickname":"IRYSIA",
         "password":"pwd1",
-        "avatarUrl":""
+        "avatarUrl":"images/userProfile/resize/portrait1.jpg"
     },
     {
         "id":2,
         "nickname":"PEAH",
         "password":"pwd2",
-        "avatarUrl":""
+        "avatarUrl":"images/userProfile/resize/portrait2.jpg"
     }
 ]

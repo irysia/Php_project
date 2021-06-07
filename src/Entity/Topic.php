@@ -2,6 +2,7 @@
 
 namespace Entity;
 
+use Entity\User;
 use ludk\Utils\Serializer;
 
 class Topic{

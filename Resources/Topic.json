@@ -3,19 +3,22 @@
         "id":1,
         "topic":"L'Enfer",
         "desc":"Il est juste que celui-là subisse un châtiment sans fin qui, par amour des choses qui n'ont point de durée, se dépouille éternellement de cet amour. La Divine Comédie, Le Paradis (1321), XV de Dante",
-        "created_at":"02/04/2021"
+        "created_at":"02/04/2021",
+        "user": 1
     },
     {
         "id":2,
         "topic":"La Catastrophe",
         "desc":"Parler de l'horrible, montrer l'horrible. Comment faut-il en parler? Peut-on en parler ? Peut-on le nommer ?",
-        "created_at":"26/04/2021"
+        "created_at":"26/04/2021",
+        "user": 2
     },
     {
         "id":3,
         "topic":"Le mouvement",
         "desc":"La danse, le geste, se regarder, communiquer, le voyage, le mirroir",
-        "created_at":"04/05/2021"
+        "created_at":"04/05/2021",
+        "user": 1
     }
 
 ]
