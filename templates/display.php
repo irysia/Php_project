@@ -149,9 +149,8 @@ if (isset($_SESSION['user'])) {
                 <li class="list-group-item border-0">
                     <!-- topic details -->
                     <div class="media">
-                        <img src="images/userProfile/resize/portrait1.jpg" class="align-self-start mr-3 rounded-circle" alt="portrait auteur du thème">
+                        <img src="<?= $one_topic->user->avatarUrl ?>" class="align-self-start mr-3 rounded-circle" alt="portrait auteur du thème">
                         <div class="media-body">
-                            <p><?= $one_topic->id ?></p>
                             <span><small><?= $one_topic->created_at ?></small></span>
                             <h5 class="mt-0"><?= $one_topic->topic ?></h5>
                             <p><?= $one_topic->desc ?></p>
