@@ -15,7 +15,7 @@ class HomeController{
 
 
         if (isset($_GET['search'])) {
-            $topics = $topicsRepo->findBy(array("content" => '%' . $_GET['search'] . '%'));
+            $topics = $topicsRepo->findBy(array("topic" => '%' . $_GET['search'] . '%'));
         } else {
             $topics = $topicsRepo->findAll();
         }
